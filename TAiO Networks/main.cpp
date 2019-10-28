@@ -4,6 +4,7 @@
 #include <chrono>
 
 #include"Model.h"
+#include"TimeSeries.h"
 
 using namespace Eigen;
 using namespace std;
@@ -64,7 +65,7 @@ int main()
 
 	////saveMatrix(*c, "C:/Users/4Ruta/OneDrive/Pulpit/Pycharm/EigenResult.txt");
 
-	int n = 100 * 100;
+	/*int n = 10 * 10;
 	bool** mask = new bool*[n];
 	for (int i = 0; i < n; i++)
 	{
@@ -73,9 +74,20 @@ int main()
 		{
 			mask[i][j] = (i > 10*j);
 		}
+	}*/
+
+	const int seriesCount = 2;
+	const int seriesLength = 4;
+	const int windowLength = 3;
+
+	double data[seriesCount][seriesLength] = { { 2, 4, 8, 16 }, {3, 6, 12, 24} };
+	TimeSeries *series = new TimeSeries[seriesCount];
+	for (int i = 0; i < seriesCount; i++)
+	{
+		series[i].add(begin(data[i]), end(data[i]));
 	}
 
-	Model model = Model(100, 100);
+	Model model = Model(seriesCount, windowLength);
 
 	
 }

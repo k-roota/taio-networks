@@ -10,7 +10,7 @@ MatrixXd Model::initMask(bool** mask) const
 	int size = getSize();
 	if (mask == nullptr)
 	{
-		return MatrixXd::Constant(size, size, 1);
+		return MatrixXd::Ones(size, size);
 	}
 	else
 	{
@@ -39,8 +39,7 @@ VectorXd Model::initBias() const
 	if (isBiasUsed)
 	{
 		int size = getSize();
-		VectorXd newBias = VectorXd::Constant(size, 0);
-		correctBias(newBias);
+		VectorXd newBias = VectorXd::Zero(size);
 		return newBias;
 	}
 	else
@@ -54,33 +53,9 @@ int Model::getSize() const
 	return vectorCount * windowLength;
 }
 
-void Model::correctWeights(MatrixXd& newWeights) const
+void Model::correctWeights(MatrixXd &newWeights) const
 {
-	newWeights = activation(newWeights).cwiseProduct(mask);
-
-	/*auto t1 = chrono::high_resolution_clock::now();*/
-	/*int n = getSize();
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
-		{
-			if (mask(i, j) == 1)
-			{
-				newWeights(i, j) = tanh(newWeights(i, j));
-			}
-			else
-			{
-				newWeights(i, j) = 0;
-			}
-		}
-	}*/
-	/*auto t2 = chrono::high_resolution_clock::now();
-	cout << "Time : " << ((t2 - t1).count() / 1000000000.0) << endl;*/
-}
-
-void Model::correctBias(VectorXd& newBias) const
-{
-	newBias = activation(newBias);
+	newWeights = newWeights.cwiseProduct(mask);
 }
 
 Model::Model(int vectorCount, int windowLength, bool** mask, bool isBiasUsed)

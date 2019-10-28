@@ -137,14 +137,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Activation.cpp" />
+    <ClCompile Include="Loss.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Optimizer.cpp" />
+    <ClCompile Include="Tanh.cpp" />
+    <ClCompile Include="TimeSeries.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Data\input.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Activation.h" />
+    <ClInclude Include="Loss.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Optimizer.h" />
+    <ClInclude Include="Tanh.h" />
+    <ClInclude Include="TimeSeries.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
