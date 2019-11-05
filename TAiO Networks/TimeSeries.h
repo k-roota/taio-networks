@@ -1,9 +1,9 @@
 #pragma once
 #include<vector>
-#include<Eigen/Dense>
+//#include<Eigen/Dense>
 
 using namespace std;
-using namespace Eigen;
+//using namespace Eigen;
 
 class TimeSeries
 {
@@ -15,7 +15,9 @@ public:
 	TimeSeries();
 	TimeSeries(double *start, double *end);
 
-	VectorXd getWindow(int size);
+	vector<double> getWindow(int size);
 	void add(double* start, double* end);
+	void add(double x);
+	void reset();
 };
 

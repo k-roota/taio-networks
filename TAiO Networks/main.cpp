@@ -2,9 +2,13 @@
 #include <Eigen/Dense>
 #include <fstream>
 #include <chrono>
+#include <memory>
 
-#include"Model.h"
-#include"TimeSeries.h"
+#include "Model.h"
+#include "TimeSeries.h"
+#include "Tanh.h"
+#include "Mse.h"
+#include "GradientDescent.h"
 
 using namespace Eigen;
 using namespace std;
@@ -38,6 +42,20 @@ void saveMatrix(const MatrixXd & const m, const string & const path)
 	ofstream file = ofstream(path);
 	file << m;
 	file.close();
+}
+
+VectorXd getSeriesVector(TimeSeries* series, int seriesCount, int windowLength)
+{
+	VectorXd X = VectorXd(seriesCount * windowLength);
+	for (int i = 0; i < seriesCount; i++)
+	{
+		vector<double> window = series[i].getWindow(windowLength);
+		for (int j = 0; j < windowLength; j++)
+		{
+			X[i * windowLength + j] = window[j];
+		}
+	}
+	return X;
 }
 
 int main()
@@ -77,17 +95,70 @@ int main()
 	}*/
 
 	const int seriesCount = 2;
-	const int seriesLength = 4;
+	const int seriesLength = 10;
 	const int windowLength = 3;
+	const int epochs = 100;
 
-	double data[seriesCount][seriesLength] = { { 2, 4, 8, 16 }, {3, 6, 12, 24} };
+	//double data[seriesCount][seriesLength] = { { 2, 4, 8, 16, 32, 64, 128 }, {3, 6, 12, 24} };
+	double max = (seriesCount + 1) * pow(2, seriesLength);
 	TimeSeries *series = new TimeSeries[seriesCount];
 	for (int i = 0; i < seriesCount; i++)
 	{
-		series[i].add(begin(data[i]), end(data[i]));
+		for (int j = 0; j < seriesLength; j++)
+		{
+			series[i].add((i + 2) * pow(2, j) / max);
+		}
 	}
 
-	Model model = Model(seriesCount, windowLength);
+	//for (double tau = 1; tau < 20; tau += 1)
+	//{
+		Tanh tanh = Tanh();
+		Mse mse = Mse();
+		GradientDescent gradientDescent = GradientDescent();
+
+		Model model = Model(&tanh, &mse, &gradientDescent, seriesCount, windowLength);
+
+		for (int e = 0; e < epochs; e++)
+		{
+			VectorXd Y = getSeriesVector(series, seriesCount, windowLength);
+			for (int i = 0; i < seriesLength - windowLength; i++)
+			{
+				VectorXd X = Y;
+				Y = getSeriesVector(series, seriesCount, windowLength);
+				//cout << endl << "X" << endl << X << endl << endl << "Y" << endl << Y << endl << endl;
+				model.trainStep(X, Y);
+			}
+			for (int i = 0; i < seriesCount; i++)
+			{
+				series[i].reset();
+			}
+			cout << endl;
+		}
+
+		double loss = 0.0;
+		VectorXd X;
+		VectorXd Y = getSeriesVector(series, seriesCount, windowLength);
+		for (int i = 0; i < seriesLength - windowLength; i++)
+		{
+			X = Y;
+			Y = getSeriesVector(series, seriesCount, windowLength);
+			//cout << endl << "X" << endl << X << endl << endl << "Y" << endl << Y << endl << endl;
+			double newLoss = mse(model.predict(X), Y);
+			if (newLoss > loss)
+				loss = newLoss;
+		}
+		for (int i = 0; i < seriesCount; i++)
+		{
+			series[i].reset();
+		}
+
+		cout << "Loss : " << loss << endl;
+
+		cout << "Predict:" << endl << Y << endl << endl << model.predict(Y) << endl << endl;
+
+		cout << model.getWeights();
+	//}
 
 	
+
 }

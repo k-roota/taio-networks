@@ -138,9 +138,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Activation.cpp" />
+    <ClCompile Include="GradientDescent.cpp" />
     <ClCompile Include="Loss.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Mse.cpp" />
     <ClCompile Include="Optimizer.cpp" />
     <ClCompile Include="Tanh.cpp" />
     <ClCompile Include="TimeSeries.cpp" />
@@ -150,8 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Activation.h" />
+    <ClInclude Include="GradientDescent.h" />
     <ClInclude Include="Loss.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Mse.h" />
     <ClInclude Include="Optimizer.h" />
     <ClInclude Include="Tanh.h" />
     <ClInclude Include="TimeSeries.h" />

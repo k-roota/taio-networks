@@ -12,5 +12,5 @@ VectorXd Tanh::operator()(const VectorXd& const A) const
 
 VectorXd Tanh::derivativeA(const VectorXd& const A, const VectorXd* const YApprox) const
 {
-	return tau / 2.0 * (1 - YApprox->cwiseProduct(*YApprox).array()).matrix();
+	return tau * (1 - YApprox->cwiseProduct(*YApprox).array()).matrix();
 }

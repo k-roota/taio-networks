@@ -36,6 +36,12 @@
     <ClCompile Include="Tanh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GradientDescent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Data\input.txt">
@@ -59,6 +65,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tanh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GradientDescent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

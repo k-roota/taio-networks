@@ -10,19 +10,25 @@ TimeSeries::TimeSeries(double* start, double* end)
 {
 }
 
-VectorXd TimeSeries::getWindow(int size)
+vector<double> TimeSeries::getWindow(int size)
 {
-	VectorXd window = VectorXd(size);
-	for (int i = 0; i < size; i++)
-	{
-		window[i] = series[i + newStartId];
-	}
+	vector<double> v = vector<double>(series.begin() + newStartId, series.begin() + newStartId + size);
 	newStartId++;
-	return window;
+	return v;
 }
 
 void TimeSeries::add(double* start, double* end)
 {
 	series.insert(series.end(), start, end);
+}
+
+void TimeSeries::add(double x)
+{
+	series.push_back(x);
+}
+
+void TimeSeries::reset()
+{
+	newStartId = 0;
 }
 
