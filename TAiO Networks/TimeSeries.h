@@ -1,23 +1,24 @@
 #pragma once
+
 #include<vector>
-//#include<Eigen/Dense>
+#include <Eigen/Dense>
 
 using namespace std;
-//using namespace Eigen;
+using namespace Eigen;
 
 class TimeSeries
 {
 private:
-	vector<double> series;
-	int newStartId;
+	vector<vector<double>> matrix;
 
 public:
-	TimeSeries();
-	TimeSeries(double *start, double *end);
+	const int seriesCount;
+	const int seriesLength;
+	
+	TimeSeries(vector<vector<double>> matrix);
 
-	vector<double> getWindow(int size);
-	void add(double* start, double* end);
-	void add(double x);
-	void reset();
+	VectorXd getWindow(int id, int length) const;
+	int getLastId(int windowLength) const;
+	VectorXd getLastWindow(int length) const;
 };
 

@@ -138,27 +138,49 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Activation.cpp" />
+    <ClCompile Include="ConfigReader.cpp" />
     <ClCompile Include="GradientDescent.cpp" />
     <ClCompile Include="Loss.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MatrixReader.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Mse.cpp" />
+    <ClCompile Include="NetworkConfig.cpp" />
     <ClCompile Include="Optimizer.cpp" />
     <ClCompile Include="Tanh.cpp" />
     <ClCompile Include="TimeSeries.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Data\input.txt" />
+    <ClCompile Include="TimeSeriesConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Activation.h" />
+    <ClInclude Include="ConfigReader.h" />
     <ClInclude Include="GradientDescent.h" />
     <ClInclude Include="Loss.h" />
+    <ClInclude Include="MatrixReader.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Mse.h" />
+    <ClInclude Include="NetworkConfig.h" />
     <ClInclude Include="Optimizer.h" />
     <ClInclude Include="Tanh.h" />
     <ClInclude Include="TimeSeries.h" />
+    <ClInclude Include="TimeSeriesConfig.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Input\config.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
+    <Text Include="Input\time_series_in.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
+    <Text Include="Input\ts_config.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
+    <Text Include="Input\zeros.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
+    <Text Include="Output\weights.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

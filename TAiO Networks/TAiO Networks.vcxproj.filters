@@ -42,11 +42,18 @@
     <ClCompile Include="GradientDescent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Data\input.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <ClCompile Include="TimeSeriesConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MatrixReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Model.h">
@@ -73,5 +80,34 @@
     <ClInclude Include="GradientDescent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TimeSeriesConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Input\config.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Input\time_series_in.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Input\ts_config.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Input\zeros.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Output\weights.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -1,34 +1,32 @@
 #include "TimeSeries.h"
 
-TimeSeries::TimeSeries()
-	:newStartId(0)
+TimeSeries::TimeSeries(vector<vector<double>> matrix):
+	matrix(matrix),
+	seriesLength(matrix.size()),
+	seriesCount(matrix[0].size())
+{}
+
+VectorXd TimeSeries::getWindow(int id, int length) const
 {
+	VectorXd window(seriesCount * length);
+
+	for (int i = 0; i < length; i++)
+	{
+		for (int j = 0; j < seriesCount; j++)
+		{
+			window[i * seriesCount + j] = matrix[i + id][j];
+		}
+	}
+
+	return window;
 }
 
-TimeSeries::TimeSeries(double* start, double* end)
-	: series(start, end), newStartId(0)
+int TimeSeries::getLastId(int windowLength) const
 {
+	return seriesLength - windowLength;
 }
 
-vector<double> TimeSeries::getWindow(int size)
+VectorXd TimeSeries::getLastWindow(int length) const
 {
-	vector<double> v = vector<double>(series.begin() + newStartId, series.begin() + newStartId + size);
-	newStartId++;
-	return v;
+	return getWindow(getLastId(length), length);
 }
-
-void TimeSeries::add(double* start, double* end)
-{
-	series.insert(series.end(), start, end);
-}
-
-void TimeSeries::add(double x)
-{
-	series.push_back(x);
-}
-
-void TimeSeries::reset()
-{
-	newStartId = 0;
-}
-
