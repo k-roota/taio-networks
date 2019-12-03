@@ -157,6 +157,15 @@ int main(int argc, char* argv[])
 			double loss = model->evaluate(*timeSeries);
 			cout << "Mean loss: " << loss << endl;
 		}
+		else if (mode == "--help")
+		{
+			cout << "Parameters: --train | --predict | --evaluate [--in-weights path] [--time-series path]" << endl
+				<< "--train: Start training. New weights are saved in \"Output/weights.txt\"" << endl
+				<< "--predict: Predict next value in the series" << endl
+				<< "--evaluate: Evaluate mean loss value in the series" << endl
+				<< "--in-weights path: A path to input model weights. If not set, random values will be chosen" << endl
+				<< "--time-series path: A path to the file with time series. If not set, \"Input/time_series_in.txt\" will be chosen";
+		}
 		else
 		{
 			throw invalid_argument("Unknown argument " + mode);
